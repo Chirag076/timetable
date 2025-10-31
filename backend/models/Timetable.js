@@ -5,7 +5,8 @@ const timetableSchema = new mongoose.Schema({
   time: String,
   subject: String,
   faculty: String,
-  room: String
+  room: String,
+  batch: String // e.g., "BCA 1 (M)" or "BCA 3 (E) - Lab 2"
 });
 
 module.exports = mongoose.model('Timetable', timetableSchema);
