@@ -162,53 +162,53 @@ async function generateTimetable() {
 
             // ✅ FIXED LAB SECTION (PARALLEL CG/CC LABS)
             // ✅ FIXED LAB SECTION (PARALLEL COMBINED ENTRY)
-if (subject.isLab) {
-  const labRooms = rooms.filter(r => r.type === 'lab');
-  const labSubjects = batchSubjects.filter(s => s.isLab);
-  if (labSubjects.length < 2 || labRooms.length < 2) continue;
+            if (subject.isLab) {
+              const labRooms = rooms.filter(r => r.type === 'lab');
+              const labSubjects = batchSubjects.filter(s => s.isLab);
+              if (labSubjects.length < 2 || labRooms.length < 2) continue;
 
-  const [lab1, lab2] = labSubjects;
-  const fac1 = faculties.find(f =>
-    f.subjects.some(subj => subj.toLowerCase() === lab1.name.toLowerCase())
-  );
-  const fac2 = faculties.find(f =>
-    f.subjects.some(subj => subj.toLowerCase() === lab2.name.toLowerCase())
-  );
-  if (!fac1 || !fac2) continue;
+              const [lab1, lab2] = labSubjects;
+              const fac1 = faculties.find(f =>
+                f.subjects.some(subj => subj.toLowerCase() === lab1.name.toLowerCase())
+              );
+              const fac2 = faculties.find(f =>
+                f.subjects.some(subj => subj.toLowerCase() === lab2.name.toLowerCase())
+              );
+              if (!fac1 || !fac2) continue;
 
-  // 🔄 Alternate lab room usage across the week
-  const existingLabs = timetable.filter(t => t.batch === batch.name && t.subject.includes('/'));
-  const alternate = existingLabs.length % 2 === 1; // swap every other time
+              // 🔄 Alternate lab room usage across the week
+              const existingLabs = timetable.filter(t => t.batch === batch.name && t.subject.includes('/'));
+              const alternate = existingLabs.length % 2 === 1; // swap every other time
 
-  const roomForLab1 = alternate ? labRooms[1] : labRooms[0];
-  const roomForLab2 = alternate ? labRooms[0] : labRooms[1];
+              const roomForLab1 = alternate ? labRooms[1] : labRooms[0];
+              const roomForLab2 = alternate ? labRooms[0] : labRooms[1];
 
-  const isRoom1Free = !timetable.some(t => t.day === day && t.time === period && t.room.includes(roomForLab1.name));
-  const isRoom2Free = !timetable.some(t => t.day === day && t.time === period && t.room.includes(roomForLab2.name));
-  if (!isRoom1Free || !isRoom2Free) continue;
+              const isRoom1Free = !timetable.some(t => t.day === day && t.time === period && t.room.includes(roomForLab1.name));
+              const isRoom2Free = !timetable.some(t => t.day === day && t.time === period && t.room.includes(roomForLab2.name));
+              if (!isRoom1Free || !isRoom2Free) continue;
 
-  // 🆕 Create ONE combined entry instead of two
-  timetable.push({
-    day,
-    time: period,
-    subject: `${lab1.name} / ${lab2.name}`,
-    faculty: `${fac1.name} / ${fac2.name}`,
-    room: `${roomForLab1.name} / ${roomForLab2.name}`,
-    batch: batch.name
-  });
+              // 🆕 Create ONE combined entry instead of two
+              timetable.push({
+                day,
+                time: period,
+                subject: `${lab1.name} / ${lab2.name}`,
+                faculty: `${fac1.name} / ${fac2.name}`,
+                room: `${roomForLab1.name} / ${roomForLab2.name}`,
+                batch: batch.name
+              });
 
-  // Mark both faculties busy
-  if (!facultyBusy[fac1.name][day]) facultyBusy[fac1.name][day] = [];
-  if (!facultyBusy[fac2.name][day]) facultyBusy[fac2.name][day] = [];
-  facultyBusy[fac1.name][day].push(period);
-  facultyBusy[fac2.name][day].push(period);
-  facultyWeeklyLoad[fac1.name]++;
-  facultyWeeklyLoad[fac2.name]++;
+              // Mark both faculties busy
+              if (!facultyBusy[fac1.name][day]) facultyBusy[fac1.name][day] = [];
+              if (!facultyBusy[fac2.name][day]) facultyBusy[fac2.name][day] = [];
+              facultyBusy[fac1.name][day].push(period);
+              facultyBusy[fac2.name][day].push(period);
+              facultyWeeklyLoad[fac1.name]++;
+              facultyWeeklyLoad[fac2.name]++;
 
-  assigned = true;
-  break;
-}
- else {
+              assigned = true;
+              break;
+            }
+            else {
               const room = getAvailableRoom(subject, day, period);
               if (!room) continue;
 
