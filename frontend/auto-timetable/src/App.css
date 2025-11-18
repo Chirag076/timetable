@@ -1,8 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .logo {
@@ -39,4 +39,92 @@
 
 .read-the-docs {
   color: #888;
+}
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #c6d8ff, #d8c6ff, #ffe6f7);
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+aside {
+  background: linear-gradient(180deg, #1e3a8a, #4338ca);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+aside button {
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+aside button:hover,
+aside button.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+/* Header */
+header {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Content */
+main {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px 0 0 0;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+/* Dashboard Layout Enhancements */
+aside h1 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+aside nav button {
+  border: none;
+  background: none;
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+aside nav button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+}
+
+aside nav button.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+}
+
+/* Smooth scrollbar */
+main::-webkit-scrollbar {
+  width: 8px;
+}
+main::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }

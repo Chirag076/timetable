@@ -1,0 +1,721 @@
+/* ====== MAIN CONTAINER ====== */
+.timetable-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 40px 35px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Poppins", sans-serif;
+  color: #222;
+}
+
+/* ====== HEADER ====== */
+.timetable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.timetable-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+
+.batch-select label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.batch-select select {
+  margin-left: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border-color 0.3s;
+}
+
+.batch-select select:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+/* ====== TABLE WRAPPER ====== */
+.timetable-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* ====== TABLE ====== */
+.timetable-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15.5px;
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ====== HEADER ROW ====== */
+.timetable-table th {
+  background-color: #4f46e5;
+  color: #ffffff;
+  padding: 14px 10px;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+  letter-spacing: 0.3px;
+}
+
+/* ====== BODY CELLS ====== */
+.timetable-table td {
+  padding: 12px 10px;
+  border: 1px solid #e5e5e5;
+  background-color: #fafafa;
+  color: #222;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.timetable-table tr:nth-child(even) td {
+  background-color: #f5f7ff;
+}
+
+.timetable-table tr:hover td {
+  background-color: #e8edff;
+}
+
+/* ====== DAY CELL ====== */
+.day-cell {
+  font-weight: 600;
+  background-color: #e0e7ff;
+  color: #1e1b4b;
+  border-right: 1px solid #d0d0ff;
+}
+
+/* ====== EDITABLE CELLS ====== */
+.editable {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.editable:hover {
+  background-color: #edf2ff;
+}
+
+.editable select {
+  width: 90%;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 14px;
+  outline: none;
+}
+
+/* ====== NO CLASS ====== */
+.no-class {
+  color: #777;
+  font-style: italic;
+  background-color: #fcfcfc;
+}
+
+/* ====== LOADING & ERROR ====== */
+.timetable-loader,
+.timetable-error {
+  text-align: center;
+  font-size: 16px;
+  color: #444;
+  padding: 40px 0;
+  font-weight: 500;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+  .timetable-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .timetable-header h2 {
+    font-size: 22px;
+  }
+
+  .timetable-container {
+    padding: 25px 15px;
+  }
+
+  .timetable-table th,
+  .timetable-table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+.timetable-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border-color 0.3s;
+}
+
+.filter-select:focus {
+  border-color: #4f46e5;
+}
+.fullview-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.fullview-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 14.5px;
+  border: 1px solid #ccc;
+}
+
+.fullview-table th,
+.fullview-table td {
+  border: 1px solid #999;
+  padding: 8px;
+  vertical-align: middle;
+}
+
+.fullview-table th {
+  font-weight: 600;
+  color: #000;
+}
+
+.batch-cell {
+  font-weight: 600;
+  background-color: #f2f2f2;
+}
+
+.class-cell {
+  background-color: #d9d9d9;
+  color: #000;
+}
+
+.lab-cell {
+  background-color: #9cd5ff;
+  color: #000;
+  font-weight: 600;
+}
+
+.room {
+  font-size: 12px;
+  color: #333;
+}
+/* ===== FULL TIMETABLE VIEW ===== */
+.fullview-wrapper {
+  overflow-x: auto;
+  margin-top: 25px;
+}
+
+.fullview-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 15px;
+  border: 1px solid #bbb;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header styling */
+.class-header {
+  background-color: #f8cbad;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+  padding: 10px;
+}
+
+.time-slot-header {
+  background-color: #f4b183;
+  color: #000;
+  font-weight: 600;
+  border: 1px solid #ccc;
+  padding: 8px 5px;
+}
+
+.slot-number {
+  font-weight: 700;
+}
+
+.slot-time {
+  font-size: 13px;
+  margin-top: 2px;
+  color: #333;
+}
+
+/* Batch column */
+.batch-name {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  padding: 10px;
+  border: 1px solid #ccc;
+  color: #000;
+}
+
+/* Class cells */
+.class-cell {
+  background-color: #d9d9d9;
+  border: 1px solid #999;
+  color: #000;
+  vertical-align: middle;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.class-cell:hover {
+  background-color: #c9c9c9;
+}
+
+/* Lab cells */
+.lab-cell {
+  background-color: #9cd5ff;
+  border: 1px solid #666;
+  font-weight: 600;
+  color: #000;
+}
+
+/* Break cells */
+.break-cell {
+  background-color: #8b4513;
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid #5a2f0a;
+  letter-spacing: 0.5px;
+}
+
+/* Empty cells */
+.empty-cell {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+
+/* Text inside cells */
+.subject-text {
+  display: block;
+  font-weight: 600;
+}
+
+.faculty-text {
+  font-size: 13px;
+  color: #333;
+}
+
+.room-text {
+  font-size: 12px;
+  color: #444;
+  margin-top: 2px;
+}
+
+/* Scroll & Responsive */
+@media (max-width: 900px) {
+  .fullview-table {
+    font-size: 13px;
+  }
+  .slot-time {
+    font-size: 11px;
+  }
+}
+/* === Full Weekly Timetable Layout === */
+
+.full-week-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.full-week-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #ccc;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.full-week-table th,
+.full-week-table td {
+  border: 1px solid #aaa;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+}
+
+/* Header Styles */
+.day-header {
+  background-color: #f4b183;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.time-header {
+  background-color: #f8cbad;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.time-cell {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  color: #000;
+}
+
+/* Slot Cell */
+.day-slot-cell {
+  vertical-align: top;
+  background-color: #ffffff;
+}
+
+/* Break Cells */
+.break-cell {
+  background-color: #8b4513;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Slot Boxes (Inside Each Cell) */
+.slot-box {
+  border-radius: 6px;
+  margin: 5px 0;
+  padding: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.class-slot {
+  background-color: #d9d9d9;
+  color: #000;
+}
+
+.lab-slot {
+  background-color: #9cd5ff;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Text Styles */
+.batch-title {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.subject-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.faculty-text {
+  font-size: 13px;
+  color: #333;
+}
+
+.room-text {
+  font-size: 12px;
+  color: #555;
+}
+
+.empty-slot {
+  color: #aaa;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+/* Scroll */
+@media (max-width: 900px) {
+  .full-week-table {
+    font-size: 13px;
+  }
+  .batch-title {
+    font-size: 12px;
+  }
+}
+.fullview-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.fullview-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #ccc;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Headers */
+.time-header {
+  background-color: #f8cbad;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.day-header {
+  background-color: #f4b183;
+  font-weight: 700;
+  font-size: 15px;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+/* Time column */
+.time-cell {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+/* Break */
+.break-cell {
+  background-color: #8b4513;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid #5a2f0a;
+}
+
+/* Day Slot cells */
+.day-slot-cell {
+  vertical-align: top;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Inside cells */
+.slot-box {
+  border-radius: 6px;
+  margin: 5px 0;
+  padding: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.class-slot {
+  background-color: #d9d9d9;
+}
+
+.lab-slot {
+  background-color: #9cd5ff;
+  font-weight: 600;
+}
+
+.batch-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.subject-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.faculty-text {
+  font-size: 13px;
+  color: #333;
+}
+
+.room-text {
+  font-size: 12px;
+  color: #555;
+}
+
+.empty-slot {
+  color: #aaa;
+  font-size: 13px;
+  margin: 4px 0;
+}
+.fullview-wrapper {
+  overflow-x: auto;
+  margin-top: 25px;
+}
+
+.fullview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  text-align: center;
+  table-layout: fixed;
+}
+
+.fullview-table th,
+.fullview-table td {
+  border: 1px solid #bbb;
+  padding: 6px;
+  vertical-align: middle;
+}
+
+/* Day Headers */
+.day-header {
+  background-color: #f4b183;
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+}
+
+.time-slot-header {
+  background-color: #f8cbad;
+  font-weight: 600;
+  font-size: 12.5px;
+}
+
+.batch-header {
+  background-color: #f8cbad;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* Batch Names */
+.batch-name {
+  font-weight: 700;
+  background-color: #f2f2f2;
+  text-align: left;
+  padding-left: 10px;
+  width: 120px;
+}
+
+/* Regular Class Cell */
+.class-cell {
+  background-color: #d9d9d9;
+  color: #000;
+}
+
+/* Lab Cell */
+.lab-cell {
+  background-color: #9cd5ff;
+  font-weight: 600;
+}
+
+/* Break Cell */
+.break-cell {
+  background-color: #8b4513;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Empty */
+.empty-cell {
+  background-color: #fff;
+}
+
+/* Text inside cells */
+.subject-text {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.faculty-text {
+  font-size: 12px;
+}
+
+.room-text {
+  font-size: 11.5px;
+  color: #444;
+}
+.day-section {
+  margin-bottom: 40px;
+}
+
+.day-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: #4f46e5;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-align: left;
+  width: fit-content;
+}
+
+.fullview-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.fullview-table th,
+.fullview-table td {
+  border: 1px solid #bbb;
+  padding: 6px;
+}
+
+.time-slot-header {
+  background-color: #f8cbad;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.batch-header {
+  background-color: #f4b183;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.batch-name {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 10px;
+  width: 140px;
+}
+
+/* Cell Colors */
+.class-cell {
+  background-color: #d9d9d9;
+}
+
+.lab-cell {
+  background-color: #9cd5ff;
+  font-weight: 600;
+}
+
+.break-cell {
+  background-color: #8b4513;
+  color: white;
+  font-weight: 700;
+}
+
+.empty-cell {
+  background-color: #fff;
+}
+
+/* Text styling */
+.subject-text {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.faculty-text {
+  font-size: 12px;
+  color: #333;
+}
+
+.room-text {
+  font-size: 11px;
+  color: #555;
+}

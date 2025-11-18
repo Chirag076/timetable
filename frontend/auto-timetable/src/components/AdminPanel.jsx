@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./AdminPanel.css"; // Add custom styles here
 
 export default function AdminPanel() {
   // ---------- Faculty ----------
@@ -19,10 +20,10 @@ export default function AdminPanel() {
   const [roomCapacity, setRoomCapacity] = useState(30);
   const [roomType, setRoomType] = useState("theory");
 
-  // ---------- Batch Type ----------
+  // ---------- Batch ----------
   const [batchType, setBatchType] = useState("morning");
 
-  // ---------- API Handlers ----------
+  // ---------- API Helper ----------
   const handleRequest = async (url, data, msg) => {
     try {
       await axios.post(url, data);
@@ -43,46 +44,35 @@ export default function AdminPanel() {
     }
   };
 
-  const cardStyle =
-    "bg-white shadow-md rounded-2xl p-6 border border-gray-100 transition-transform hover:scale-[1.01]";
-
-  const inputStyle =
-    "border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none";
-
-  const buttonStyle =
-    "mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors";
-
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-        🎓 Admin Panel — Timetable Manager
-      </h1>
+    <div className="admin-container">
+      <h1 className="admin-title">🎓 Admin Panel — Timetable Manager</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="admin-grid">
         {/* Faculty Card */}
-        <div className={cardStyle}>
-          <h2 className="text-xl font-semibold mb-4 text-blue-600">Add Faculty</h2>
+        <div className="admin-card">
+          <h2 className="card-title blue">Add Faculty</h2>
           <input
-            className={inputStyle}
+            className="input"
             placeholder="Faculty Name"
             value={facultyName}
-            onChange={e => setFacultyName(e.target.value)}
+            onChange={(e) => setFacultyName(e.target.value)}
           />
           <input
-            className={`${inputStyle} mt-3`}
+            className="input"
             placeholder="Subjects (comma separated)"
             value={facultySubjects}
-            onChange={e => setFacultySubjects(e.target.value)}
+            onChange={(e) => setFacultySubjects(e.target.value)}
           />
           <input
-            className={`${inputStyle} mt-3`}
+            className="input"
             type="number"
             placeholder="Max Hours per Week"
             value={facultyMaxHours}
-            onChange={e => setFacultyMaxHours(e.target.value)}
+            onChange={(e) => setFacultyMaxHours(e.target.value)}
           />
           <button
-            className={buttonStyle}
+            className="btn blue"
             onClick={() =>
               handleRequest(
                 "http://localhost:5000/api/faculty",
@@ -107,55 +97,53 @@ export default function AdminPanel() {
         </div>
 
         {/* Subject Card */}
-        <div className={cardStyle}>
-          <h2 className="text-xl font-semibold mb-4 text-green-600">Add Subject</h2>
+        <div className="admin-card">
+          <h2 className="card-title green">Add Subject</h2>
           <input
-            className={inputStyle}
+            className="input"
             placeholder="Subject Name"
             value={subjectName}
-            onChange={e => setSubjectName(e.target.value)}
+            onChange={(e) => setSubjectName(e.target.value)}
           />
-          <div className="flex gap-2 mt-3">
+          <div className="input-row">
             <input
-              className={`${inputStyle}`}
+              className="input small"
               type="number"
               placeholder="Semester"
               value={semester}
-              onChange={e => setSemester(e.target.value)}
+              onChange={(e) => setSemester(e.target.value)}
             />
             <input
-              className={`${inputStyle}`}
+              className="input small"
               type="number"
               placeholder="Credits"
               value={credits}
-              onChange={e => setCredits(e.target.value)}
+              onChange={(e) => setCredits(e.target.value)}
             />
           </div>
-          <div className="flex items-center gap-2 mt-3">
+          <div className="checkbox-row">
             <input
               type="checkbox"
               checked={isLab}
-              onChange={e => setIsLab(e.target.checked)}
+              onChange={(e) => setIsLab(e.target.checked)}
             />
             <span>Is Lab?</span>
           </div>
           <input
-            className={`${inputStyle} mt-3`}
+            className="input"
             type="number"
             placeholder="Number of Students"
             value={students}
-            onChange={e => setStudents(e.target.value)}
+            onChange={(e) => setStudents(e.target.value)}
           />
           <button
-            className={`${buttonStyle} bg-green-600 hover:bg-green-700`}
+            className="btn green"
             onClick={() =>
-              handleRequest("http://localhost:5000/api/subject", {
-                name: subjectName,
-                semester,
-                credits,
-                isLab,
-                students,
-              }, "Subject")
+              handleRequest(
+                "http://localhost:5000/api/subject",
+                { name: subjectName, semester, credits, isLab, students },
+                "Subject"
+              )
             }
           >
             ➕ Add Subject
@@ -163,31 +151,31 @@ export default function AdminPanel() {
         </div>
 
         {/* Room Card */}
-        <div className={cardStyle}>
-          <h2 className="text-xl font-semibold mb-4 text-purple-600">Add Room</h2>
+        <div className="admin-card">
+          <h2 className="card-title purple">Add Room</h2>
           <input
-            className={inputStyle}
+            className="input"
             placeholder="Room Name"
             value={roomName}
-            onChange={e => setRoomName(e.target.value)}
+            onChange={(e) => setRoomName(e.target.value)}
           />
           <input
-            className={`${inputStyle} mt-3`}
+            className="input"
             type="number"
             placeholder="Capacity"
             value={roomCapacity}
-            onChange={e => setRoomCapacity(e.target.value)}
+            onChange={(e) => setRoomCapacity(e.target.value)}
           />
           <select
-            className={`${inputStyle} mt-3`}
+            className="input"
             value={roomType}
-            onChange={e => setRoomType(e.target.value)}
+            onChange={(e) => setRoomType(e.target.value)}
           >
             <option value="theory">Theory</option>
             <option value="lab">Lab</option>
           </select>
           <button
-            className={`${buttonStyle} bg-purple-600 hover:bg-purple-700`}
+            className="btn purple"
             onClick={() =>
               handleRequest(
                 "http://localhost:5000/api/room",
@@ -202,22 +190,18 @@ export default function AdminPanel() {
       </div>
 
       {/* Timetable Generator */}
-      <div className="mt-10 text-center">
-        <label className="mr-3 font-medium text-gray-700">
+      <div className="timetable-gen">
+        <label>
           Batch Type:
           <select
-            className="ml-2 px-3 py-2 border rounded-lg"
             value={batchType}
-            onChange={e => setBatchType(e.target.value)}
+            onChange={(e) => setBatchType(e.target.value)}
           >
             <option value="morning">Morning</option>
             <option value="evening">Evening</option>
           </select>
         </label>
-        <button
-          className="ml-4 bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-all"
-          onClick={generateTimetable}
-        >
+        <button className="btn indigo" onClick={generateTimetable}>
           ⚙️ Generate Timetable
         </button>
       </div>

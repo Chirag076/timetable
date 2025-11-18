@@ -1,60 +1,172 @@
 import React, { useState } from "react";
 import AdminPanel from "./components/AdminPanel";
 import TimetableView from "./components/TimetableView";
+import "./App.css";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("admin");
 
   return (
-    <div className="flex min-h-screen bg-gray-100 font-sans">
+    <div
+      style={{
+        display: "flex",
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+        fontFamily: "'Poppins', sans-serif",
+        background: "linear-gradient(135deg, #c6d8ff, #d8c6ff, #ffe6f7)",
+      }}
+    >
       {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-blue-700 to-indigo-800 text-white flex flex-col">
-        <div className="text-center py-6 border-b border-blue-500">
-          <h1 className="text-2xl font-bold tracking-wide">
-            🏫 Timetable Generator
+      <aside
+        style={{
+          width: "260px",
+          background: "linear-gradient(180deg, #1e3a8a, #4338ca)",
+          color: "white",
+          display: "flex",
+          flexDirection: "column",
+          padding: "25px 0",
+          boxShadow: "4px 0 15px rgba(0, 0, 0, 0.25)",
+        }}
+      >
+        {/* Logo */}
+        <div
+          style={{
+            textAlign: "center",
+            borderBottom: "1px solid rgba(255,255,255,0.3)",
+            paddingBottom: "20px",
+            marginBottom: "25px",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "24px",
+              fontWeight: "700",
+              letterSpacing: "0.5px",
+              marginBottom: "6px",
+            }}
+          >
+            🏫 Timetable Pro
           </h1>
-          <p className="text-sm text-blue-200 mt-1">Admin Dashboard</p>
+          <p style={{ fontSize: "14px", color: "#d1d5ff" }}>Admin Dashboard</p>
         </div>
 
-        <nav className="flex-1 mt-6 space-y-1">
-          <button
-            onClick={() => setActiveTab("admin")}
-            className={`w-full text-left px-6 py-3 font-medium hover:bg-blue-600 transition ${
-              activeTab === "admin" ? "bg-blue-600" : ""
-            }`}
-          >
-            🧑‍🏫 Manage Data
-          </button>
-          <button
-            onClick={() => setActiveTab("timetable")}
-            className={`w-full text-left px-6 py-3 font-medium hover:bg-blue-600 transition ${
-              activeTab === "timetable" ? "bg-blue-600" : ""
-            }`}
-          >
-            🗓️ View Timetable
-          </button>
+        {/* Navigation */}
+        <nav
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+            padding: "0 20px",
+          }}
+        >
+          {[
+            { id: "admin", label: "🧑‍🏫 Manage Data" },
+            { id: "timetable", label: "🗓️ View Timetable" },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              className={activeTab === tab.id ? "active" : ""}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                border: "none",
+                background:
+                  activeTab === tab.id
+                    ? "rgba(255,255,255,0.25)"
+                    : "transparent",
+                color: "white",
+                padding: "12px 18px",
+                textAlign: "left",
+                fontSize: "16px",
+                fontWeight: activeTab === tab.id ? "600" : "500",
+                borderRadius: "8px",
+                cursor: "pointer",
+                transition: "background 0.3s, transform 0.2s",
+              }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.background = "rgba(255,255,255,0.15)")
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.background =
+                  activeTab === tab.id ? "rgba(255,255,255,0.25)" : "transparent")
+              }
+            >
+              {tab.label}
+            </button>
+          ))}
         </nav>
 
-        
+        {/* Footer */}
+        <footer
+          style={{
+            marginTop: "auto",
+            textAlign: "center",
+            fontSize: "13px",
+            color: "#a5b4fc",
+            paddingTop: "30px",
+            borderTop: "1px solid rgba(255,255,255,0.3)",
+          }}
+        >
+          © {new Date().getFullYear()} Timetable Pro
+        </footer>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col">
+      {/* Main Section */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(10px)",
+        }}
+      >
         {/* Header */}
-        <header className="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
-          <h2 className="text-xl font-semibold text-gray-700">
+        <header
+          style={{
+            padding: "18px 35px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+            background: "rgba(255,255,255,0.9)",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "22px",
+              color: "#222",
+              fontWeight: "600",
+            }}
+          >
             {activeTab === "admin" ? "Admin Panel" : "Generated Timetable"}
           </h2>
-          <span className="text-sm text-gray-500">
-            {new Date().toLocaleDateString()}
+          <span style={{ color: "#444", fontSize: "15px", fontWeight: "500" }}>
+            {new Date().toLocaleDateString("en-IN", {
+              weekday: "long",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
           </span>
         </header>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-8 bg-gray-50">
+        <main
+          style={{
+            flex: 1,
+            padding: "35px",
+            overflowY: "auto",
+            fontSize: "16px",
+            color: "#333",
+          }}
+        >
           {activeTab === "admin" ? <AdminPanel /> : <TimetableView />}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

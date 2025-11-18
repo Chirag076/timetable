@@ -1,0 +1,186 @@
+/* ====== MAIN CONTAINER ====== */
+.admin-container {
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  min-height: 100%;
+  color: #222;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ====== HEADING ====== */
+.admin-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #1e1e1e;
+}
+
+/* ====== GRID LAYOUT ====== */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* ====== CARD DESIGN ====== */
+.admin-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 25px 25px 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* ====== CARD TITLES ====== */
+.card-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.card-title.blue {
+  color: #2563eb;
+}
+.card-title.green {
+  color: #16a34a;
+}
+.card-title.purple {
+  color: #7e22ce;
+}
+
+/* ====== INPUTS ====== */
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 5px rgba(79, 70, 229, 0.3);
+  outline: none;
+}
+
+/* ====== ROWS ====== */
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.input.small {
+  flex: 1;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 15px;
+}
+
+/* ====== BUTTONS ====== */
+.btn {
+  margin-top: 18px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Button Colors */
+.btn.blue {
+  background-color: #2563eb;
+}
+.btn.green {
+  background-color: #16a34a;
+}
+.btn.purple {
+  background-color: #7e22ce;
+}
+.btn.indigo {
+  background-color: #4f46e5;
+}
+
+/* Hover States */
+.btn.blue:hover {
+  background-color: #1e3a8a;
+}
+.btn.green:hover {
+  background-color: #15803d;
+}
+.btn.purple:hover {
+  background-color: #6b21a8;
+}
+.btn.indigo:hover {
+  background-color: #3730a3;
+}
+
+/* ====== TIMETABLE GENERATOR SECTION ====== */
+.timetable-gen {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.timetable-gen select {
+  margin-left: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border-color 0.3s;
+}
+
+.timetable-gen select:focus {
+  border-color: #4f46e5;
+}
+
+.timetable-gen button {
+  margin-left: 20px;
+}
+
+/* ====== RESPONSIVE DESIGN ====== */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 25px 15px;
+  }
+
+  .admin-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .admin-card {
+    padding: 20px;
+  }
+}
