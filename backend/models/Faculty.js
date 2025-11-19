@@ -1,17 +1,38 @@
 const mongoose = require('mongoose');
 
 const facultySchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
 
-  subjects: [{ type: String }],
+  // Subjects teacher can teach (normal + labs)
+  subjects: [{ type: String, required: true }],
 
-  maxHoursPerWeek: { type: Number, default: 20 },   // total load cap (5 days × 4 hrs)
-  maxHoursPerDay: { type: Number, default: 4 },     // to prevent daily overload
+  maxHoursPerWeek: { type: Number, default: 20 },
+  maxHoursPerDay: { type: Number, default: 4 },
 
-  availability: [{ day: String, start: String, end: String }],
+  availability: [
+    {
+      day: { type: String, required: true },
+      start: { type: String, required: true },
+      end: { type: String, required: true }
+    }
+  ],
 
-  room: { type: String },                           // preferred classroom/lab (e.g., "Room101")
-  department: { type: String, default: 'BCA' },     // optional grouping for large setups
+  // ⭐ IMPORTANT CHANGE:
+  // Teacher can teach MULTIPLE batches (array instead of single string)
+  batchAssignments: {
+    type: [String],
+    enum: [
+      "BCA 1 (M)", "BCA 1 (E)",
+      "BCA 3 (M)", "BCA 3 (E)",
+      "BCA 5 (M)", "BCA 5 (E)"
+    ],
+    required: true
+  },
+
+  department: { type: String, default: "BCA" }
 });
 
-module.exports = mongoose.model('Faculty', facultySchema);
+// still keep this to avoid duplicate teacher creation
+facultySchema.index({ name: 1 }, { unique: true });
+
+module.exports = mongoose.model("Faculty", facultySchema);
