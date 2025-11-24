@@ -46,7 +46,7 @@ export default function App() {
               marginBottom: "6px",
             }}
           >
-            🏫 Timetable Pro
+            🏫 Timetable Generator
           </h1>
           <p style={{ fontSize: "14px", color: "#d1d5ff" }}>Admin Dashboard</p>
         </div>
@@ -107,7 +107,7 @@ export default function App() {
             borderTop: "1px solid rgba(255,255,255,0.3)",
           }}
         >
-          © {new Date().getFullYear()} Timetable Pro
+          © {new Date().getFullYear()} Timetable Generator
         </footer>
       </aside>
 
